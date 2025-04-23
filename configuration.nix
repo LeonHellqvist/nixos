@@ -122,7 +122,7 @@ in
     };
   };
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
 
   stylix.image = ./wallpapers/wallpaper1.png;
 

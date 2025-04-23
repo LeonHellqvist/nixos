@@ -42,6 +42,7 @@
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
+        "$mainMod, F, fullscreen,"
         "$mainMod, space, exec, $menu"
 
         "$mainMod, left, movefocus, l"
@@ -84,19 +85,19 @@
 
       general = {
         "border_size" = "2";
-        "gaps_in" = "2";
-        "gaps_out" = "4";
+        "gaps_in" = "4";
+        "gaps_out" = "8";
       };
 
       decoration = {
         "rounding" = "10";
               
-        "active_opacity" = "1.0";
-        "inactive_opacity" = "0.9";
+        "active_opacity" = "0.95";
+        "inactive_opacity" = "0.8";
         "fullscreen_opacity" = "1.0";
 
         "dim_inactive" = "true";
-        "dim_strength" = "0.1";
+        "dim_strength" = "0.05";
         "dim_special" = "0.8";
 
         shadow = {
@@ -108,7 +109,7 @@
 
         blur = {
           "enabled" = "true";	
-          "size" = "6";
+          "size" = "7";
           "passes" = "2";
           "ignore_opacity" = "true";
           "new_optimizations" = "true";

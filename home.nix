@@ -6,6 +6,7 @@
     ./modules/home-manager/sherlock.nix
     ./modules/home-manager/waybar.nix
     ./modules/home-manager/alacritty.nix
+    inputs.zen-browser.homeModules.beta
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -113,24 +114,24 @@
         #inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
       ];
       xdgOpenUsePortal = true;
-      #config = {
-      #  hyprland = {
-      #    default = [
-      #      "hyprland"
-      #      "gtk"
-      #    ];
-      #    "org.freedesktop.impl.portal.Secret" = [
-      #      "gnome-keyring"
-      #    ];
-      #    "org.freedesktop.impl.portal.Settings" = [
-      #      "gnome"
-      #    ];
-      #    "org.freedesktop.portal.Settings" = [
-      #      "gnome"
-      #    ];
-      #  };
-      #};
-      config.hyprland.default = [ "gnome" "gtk" ];
+      config = {
+        hyprland = {
+          default = [
+            "hyprland"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [
+            "gnome-keyring"
+          ];
+          "org.freedesktop.impl.portal.Settings" = [
+            "gnome"
+          ];
+          "org.freedesktop.portal.Settings" = [
+            "gnome"
+          ];
+        };
+      };
+      #config.hyprland.default = [ "gnome" "gtk" "hyprland" "kde" ];
     };
   };
 
@@ -169,6 +170,15 @@
 
     settings = {
       # ... dunstrc items
+    };
+  };
+
+  programs.zen-browser = {
+    enable = true;
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+      # find more options here: https://mozilla.github.io/policy-templates/
     };
   };
 
