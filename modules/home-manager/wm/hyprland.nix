@@ -36,6 +36,8 @@
 
       "$fileManager" = "nautilus";
 
+      "$colorPicker" = "hyprpicker";
+
       bind = [
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
@@ -44,6 +46,7 @@
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen,"
         "$mainMod, space, exec, $menu"
+        "$mainMod, P, exec, $colorPicker"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"

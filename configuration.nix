@@ -136,6 +136,11 @@ in
 
   programs.firefox.enable = true;
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -152,6 +157,8 @@ in
     xdg-desktop-portal-gnome
     kdePackages.xdg-desktop-portal-kde
     git
+    scrcpy
+    pkgs.distrobox
     myALSAProfiles
   ];
 

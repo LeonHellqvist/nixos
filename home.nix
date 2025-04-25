@@ -35,6 +35,7 @@
     vscode
     hyprpolkitagent
     hyprland-qt-support
+    hyprpicker
     discord
 
     github-desktop
