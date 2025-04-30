@@ -36,11 +36,16 @@
     hyprpolkitagent
     hyprland-qt-support
     hyprpicker
+    brightnessctl
     discord
+    signal-desktop
 
     github-desktop
     devenv
     direnv
+    yaak
+    slack
+    inkscape
 
     dunst
     libnotify

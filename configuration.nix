@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }: 
+{ config, lib, pkgs, inputs, stylix, ... }:
 
 let
   myALSAProfiles = pkgs.callPackage ./alsa-card-profiles.nix {};
@@ -64,10 +64,9 @@ in
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   # services.displayManager.sddm.enable = true;
 
-  services.xserver.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
   services.blueman.enable = true;
@@ -116,19 +115,41 @@ in
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs stylix; };
     users = {
       "leon" = import ./home.nix;
     };
   };
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
 
   stylix.image = ./wallpapers/wallpaper1.png;
 
   stylix.enable = true;
 
   stylix.polarity = "dark";
+
+  /* stylix.fonts = {
+    serif = {
+      package = pkgs.noto-fonts;
+      name = "Noto Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.noto-fonts;
+      name = "Noto Sans";
+    };
+
+    monospace = {
+      package = pkgs.noto-fonts;
+      name = "Noto Sans Mono";
+    };
+
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+  }; */
 
   stylix.targets.gtk.enable = true;
 
@@ -157,10 +178,18 @@ in
     xdg-desktop-portal-gnome
     kdePackages.xdg-desktop-portal-kde
     git
+    bzip2
+    gzip
+    p7zip 
+    unrar 
+    unzip 
+    zip
     scrcpy
     pkgs.distrobox
     myALSAProfiles
   ];
+
+  programs.file-roller.enable = true;
 
   #xdg = {
   #  autostart.enable = true;

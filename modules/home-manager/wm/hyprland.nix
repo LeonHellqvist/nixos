@@ -1,4 +1,57 @@
 { pkgs, lib, inputs, ... }: {
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        grace = 300;
+      };
+
+      background = lib.mkForce [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        before_sleep_cmd = "loginctl lock-session";
+        lock_cmd = "pidof hyprlock || hyprlock";
+      };
+
+      listener = [
+        {
+          timeout = 150;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 150;
+          on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+          on-resume = "brightnessctl -rd rgb:kbd_backlight";
+        }
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 330;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+        }
+        {
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
 
   wayland.windowManager.hyprland = {
     # allow home-manager to configure hyprland
@@ -47,6 +100,7 @@
         "$mainMod, F, fullscreen,"
         "$mainMod, space, exec, $menu"
         "$mainMod, P, exec, $colorPicker"
+        "$mainMod, L, exec, hyprlock --immediate"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
