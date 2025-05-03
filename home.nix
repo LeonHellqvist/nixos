@@ -46,7 +46,12 @@
     yaak
     slack
     inkscape
+    wireguard-ui
+    wireguard-tools
 
+    gthumb
+    gimp3
+    
     dunst
     libnotify
 

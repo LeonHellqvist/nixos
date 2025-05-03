@@ -13,6 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./modules/nixos/nvidia.nix
+      ./modules/nixos/steam.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -30,6 +31,10 @@ in
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
   nvidia = {
+    enable = true;
+  };
+
+  steam = {
     enable = true;
   };
 
@@ -120,6 +125,27 @@ in
       "leon" = import ./home.nix;
     };
   };
+
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = [ "10.160.98.159/32" "fd7d:76ee:e68f:a993:2158:e91f:634c:e1b/128" ];
+      dns = [ "10.128.0.1" "fd7d:76ee:e68f:a993::1" ];
+      privateKeyFile = "/root/wireguard-keys/ain_private_key";
+      mtu = 1320;
+      
+      peers = [
+        {
+          publicKey = "PyLCXAQT8KkM4T+dUsOQfn+Ub3pGxfGlxkIApuig+hk=";
+          presharedKeyFile = "/root/wireguard-keys/ain_preshared_key";
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "128.127.104.82:1637";
+          persistentKeepalive = 15;
+        }
+      ];
+    };
+  };
+
+  services.gnome.sushi.enable = true;
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
 
