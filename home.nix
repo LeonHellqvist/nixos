@@ -49,6 +49,12 @@
     wireguard-ui
     wireguard-tools
 
+    monero-gui
+    monero-cli
+
+    protonup
+    superTuxKart
+
     gthumb
     gimp3
     
@@ -105,6 +111,8 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+      "\\\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   programs.bash.enable = true;

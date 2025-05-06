@@ -34,7 +34,7 @@ in
     enable = true;
   };
 
-  steam = {
+  steamClient = {
     enable = true;
   };
 
@@ -110,6 +110,9 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  services.resolved.enable = true;
+  services.mullvad-vpn.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leon = {
     isNormalUser = true;
@@ -123,25 +126,6 @@ in
     extraSpecialArgs = { inherit inputs stylix; };
     users = {
       "leon" = import ./home.nix;
-    };
-  };
-
-  networking.wg-quick.interfaces = {
-    wg0 = {
-      address = [ "10.160.98.159/32" "fd7d:76ee:e68f:a993:2158:e91f:634c:e1b/128" ];
-      dns = [ "10.128.0.1" "fd7d:76ee:e68f:a993::1" ];
-      privateKeyFile = "/root/wireguard-keys/ain_private_key";
-      mtu = 1320;
-      
-      peers = [
-        {
-          publicKey = "PyLCXAQT8KkM4T+dUsOQfn+Ub3pGxfGlxkIApuig+hk=";
-          presharedKeyFile = "/root/wireguard-keys/ain_preshared_key";
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "128.127.104.82:1637";
-          persistentKeepalive = 15;
-        }
-      ];
     };
   };
 
@@ -203,6 +187,7 @@ in
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
     kdePackages.xdg-desktop-portal-kde
+    mullvad-vpn
     git
     bzip2
     gzip
