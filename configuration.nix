@@ -38,10 +38,16 @@ in
     enable = true;
   };
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true; 
+  services.udisks2.enable = true;
+
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+  networking.networkmanager.insertNameservers = [ "192.168.1.63" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 
@@ -195,6 +201,9 @@ in
     unrar 
     unzip 
     zip
+    grim
+    slurp
+    wl-clipboard
     scrcpy
     pkgs.distrobox
     myALSAProfiles

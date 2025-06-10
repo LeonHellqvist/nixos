@@ -101,6 +101,7 @@
         "$mainMod, space, exec, $menu"
         "$mainMod, P, exec, $colorPicker"
         "$mainMod, L, exec, hyprlock --immediate"
+        ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy" 
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"

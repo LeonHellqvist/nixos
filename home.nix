@@ -39,6 +39,7 @@
     brightnessctl
     discord
     signal-desktop
+    ungoogled-chromium
 
     github-desktop
     devenv
