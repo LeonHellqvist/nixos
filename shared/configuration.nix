@@ -11,7 +11,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       inputs.home-manager.nixosModules.default
-      ./modules/nixos/steam.nix
+      ../modules/nixos/steam.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -126,7 +126,7 @@ in
   home-manager = {
     extraSpecialArgs = { inherit inputs stylix; };
     users = {
-      "leon" = import ./home.nix;
+      "leon" = import ../home.nix;
     };
   };
 
