@@ -111,6 +111,7 @@
   users.users.leon = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    initialPassword = "changeme"; # Set a password for the user.
     packages = with pkgs; [
       tree
     ];
