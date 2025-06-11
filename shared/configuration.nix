@@ -4,9 +4,6 @@
 
 { config, lib, pkgs, inputs, stylix, ... }:
 
-let
-  myALSAProfiles = pkgs.callPackage ./alsa-card-profiles.nix {};
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -201,7 +198,6 @@ in
     wl-clipboard
     scrcpy
     pkgs.distrobox
-    myALSAProfiles
   ];
 
   programs.file-roller.enable = true;
