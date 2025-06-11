@@ -3,7 +3,6 @@
 {
   imports = [
     ./modules/home-manager/wm/hyprland.nix
-    ./modules/home-manager/sherlock.nix
     ./modules/home-manager/waybar.nix
     ./modules/home-manager/alacritty.nix
     inputs.zen-browser.homeModules.beta
