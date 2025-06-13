@@ -58,10 +58,10 @@
     enable = true;
 
     settings = {
-      monitor = "DP-2, 3440x1440@143.97, 0x0, 1, vrr, 2";
+      monitor = ", 2880x1800@120, 0x0, 1.5, vrr, 1";
       
       cursor = {
-        "no_hardware_cursors" = true;
+        "no_hardware_cursors" = false;
       };
      
       xwayland = {

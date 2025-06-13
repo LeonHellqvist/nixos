@@ -20,7 +20,7 @@
       inputs.hyprland.follows = "hyprland";
     }; */
 
-    sherlock.url = "github:Skxxtz/sherlock";
+    sherlock.url = "github:Skxxtz/sherlock?ref=hotfix";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -43,11 +43,11 @@
       ];
     };
 
-    nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ./shared/configuration.nix
-        ./hosts/yoga/configuration.nix
+        ./hosts/thinkpad/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix
         disko.nixosModules.disko
