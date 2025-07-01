@@ -1,4 +1,57 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, inputs, config, osConfig ? {}, ... }:
+
+let
+  # Try to get hostname from osConfig, fall back to executing hostname command
+  hostname = if osConfig ? networking.hostName 
+             then osConfig.networking.hostName
+             else builtins.exec ["hostname"];
+  
+  # Define monitor configurations for different machines
+  monitorConfig = 
+    if hostname == "desktop" then 
+      ", 3440@1440@143.97, 0x0, 1, vrr, 2"
+    else if hostname == "thinkpad" then
+      ", 2880x1800@120, 0x0, 1.5, vrr, 2"
+    else
+      # Default fallback configuration
+      ", preferred, auto, 2";
+      
+  # Define input configurations based on hostname
+  inputConfig = 
+    if hostname == "desktop" then {
+      # Desktop optimized input
+      "accel_profile" = "flat";
+      "follow_mouse" = "1";
+      "force_no_accel" = "1";  # No acceleration for precise mouse movements
+      "kb_layout" = "se";
+      "sensitivity" = "0.000000";
+    } else if hostname == "thinkpad" then {
+      # Laptop optimized input with touchpad settings
+      "accel_profile" = "adaptive";
+      "follow_mouse" = "1";
+      "force_no_accel" = "0";  # Allow some acceleration on laptop
+      "kb_layout" = "se";
+      "sensitivity" = "0.400000";  # Fixed typo (was "0.5 00000")
+      "touchpad" = {
+        "natural_scroll" = "false";
+        "disable_while_typing" = "true";
+        "tap-to-click" = "true";
+        "scroll_factor" = "0.5";
+        "middle_button_emulation" = "true";
+        "clickfinger_behavior" = "false";       # Changed to false for area-based clicking
+        "tap_button_map" = "lr";                # Changed from "lrm" to "lr" - removes middle click area
+        "drag_lock" = "false";                 # Prevents cursor from getting stuck
+        "tap-and-drag" = "false";             # Prevents sticking during games
+      };
+    } else {
+      # Default fallback configuration
+      "accel_profile" = "adaptive";
+      "follow_mouse" = "1";
+      "kb_layout" = "se";
+      "sensitivity" = "0.000000";
+    };
+in
+{
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -58,7 +111,7 @@
     enable = true;
 
     settings = {
-      monitor = ", 2880x1800@120, 0x0, 1.5, vrr, 1";
+      monitor = monitorConfig;
       
       cursor = {
         "no_hardware_cursors" = false;
@@ -73,13 +126,8 @@
         "waybar"
       ];
 
-      input = {
-        "accel_profile" = "flat";
-        "follow_mouse" = "1";
-        "force_no_accel" = "1";
-        "kb_layout" = "se";
-        "sensitivity" = "0.000000"; 
-      };
+      # Use the hostname-based input config
+      input = inputConfig;
     
       "$mainMod" = "SUPER";
 
@@ -102,6 +150,12 @@
         "$mainMod, P, exec, $colorPicker"
         "$mainMod, L, exec, hyprlock --immediate"
         ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy" 
+        ", XF86SelectiveScreenshot, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+
+        ", XF86MonBrightnessUp, exec, brightnessctl -e -s set +10%"
+        ", XF86MonBrightnessDown, exec, brightnessctl -e -s set 10%-"
+
+        "$mainMod SHIFT, D, exec, hyprctl keyword input:touchpad:disable_while_typing $(($(hyprctl getoption input:touchpad:disable_while_typing -j | jq '.int' == 0)))"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"

@@ -22,6 +22,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
@@ -83,6 +85,37 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
+  networking.firewall.allowedTCPPorts = [ 25565 ];
+  networking.firewall.allowedUDPPorts = [ 25565 ];
+
+  /* services.dnsmasq = {
+    enable = true;
+    settings = {
+      interface = "wlp0s20f3";
+      bind-interfaces = true;
+      dhcp-range = "192.168.42.2,192.168.42.20,255.255.255.0,24h";
+      dhcp-option = [
+        "option:router,192.168.42.1"
+        "option:dns-server,192.168.42.1"
+      ];
+    };
+  }; */
+
+  /* services.dnsmasq = {
+    enable = true;
+    # Let NetworkManager start dnsmasq instances as needed
+    settings = {
+      # Basic DNS settings
+      domain-needed = true;
+      bogus-priv = true;
+      # Don't bind to specific interfaces, let NetworkManager control this
+      # No interface-specific configuration here
+    };
+  }; */
+
+  # Allow AP mode for your wireless card
+  # networking.networkmanager.unmanaged = [ "interface-name:wlp0s20f3" ];  
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "se";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -106,6 +139,7 @@
 
   services.resolved.enable = true;
   services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leon = {
@@ -195,6 +229,8 @@
     wl-clipboard
     scrcpy
     pkgs.distrobox
+    linux-wifi-hotspot
+    tor-browser-bundle-bin
   ];
 
   programs.file-roller.enable = true;

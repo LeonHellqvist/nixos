@@ -40,6 +40,7 @@
     discord
     signal-desktop
     ungoogled-chromium
+    prismlauncher
 
     github-desktop
     devenv
