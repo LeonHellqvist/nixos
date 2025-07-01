@@ -11,10 +11,10 @@ let
     if hostname == "desktop" then 
       ", 3440@1440@143.97, 0x0, 1, vrr, 2"
     else if hostname == "thinkpad" then
-      ", 2880x1800@120, 0x0, 1.5, vrr, 2"
+      ", 2880x1800@120, 0x0, 1.5, vrr, 0"
     else
       # Default fallback configuration
-      ", preferred, auto, 2";
+      ", preferred, auto, 0";
       
   # Define input configurations based on hostname
   inputConfig = 
@@ -31,12 +31,12 @@ let
       "follow_mouse" = "1";
       "force_no_accel" = "0";  # Allow some acceleration on laptop
       "kb_layout" = "se";
-      "sensitivity" = "0.400000";  # Fixed typo (was "0.5 00000")
+      "sensitivity" = "0.200000";  # Fixed typo (was "0.5 00000")
       "touchpad" = {
-        "natural_scroll" = "false";
+        "natural_scroll" = "true";
         "disable_while_typing" = "true";
         "tap-to-click" = "true";
-        "scroll_factor" = "0.5";
+        "scroll_factor" = "0.4";
         "middle_button_emulation" = "true";
         "clickfinger_behavior" = "false";       # Changed to false for area-based clicking
         "tap_button_map" = "lr";                # Changed from "lrm" to "lr" - removes middle click area
@@ -81,7 +81,7 @@ in
       listener = [
         {
           timeout = 150;
-          on-timeout = "brightnessctl -s set 10";
+          on-timeout = "brightnessctl -s set 5";
           on-resume = "brightnessctl -r";
         }
         {
@@ -118,7 +118,7 @@ in
       };
      
       xwayland = {
-        "force_zero_scaling" = true;
+        "force_zero_scaling" = false;
       };
 
       "exec-once" = [
@@ -152,8 +152,11 @@ in
         ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy" 
         ", XF86SelectiveScreenshot, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
-        ", XF86MonBrightnessUp, exec, brightnessctl -e -s set +10%"
-        ", XF86MonBrightnessDown, exec, brightnessctl -e -s set 10%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl -e -s set +5%"
+        ", XF86MonBrightnessDown, exec, brightnessctl -e -s set 5%-"
+
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 
         "$mainMod SHIFT, D, exec, hyprctl keyword input:touchpad:disable_while_typing $(($(hyprctl getoption input:touchpad:disable_while_typing -j | jq '.int' == 0)))"
 

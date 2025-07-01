@@ -69,7 +69,7 @@
   services.libinput = {
     enable = true;
     touchpad = {
-      naturalScrolling = false;
+      naturalScrolling = true;
       tappingDragLock = false;
       tapping = true;
       clickMethod = "buttonareas";  # Enable area-based clicking instead of clickfinger
