@@ -36,14 +36,18 @@
   # Power management - balanced for programming tasks
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "balanced_performance"; # Better balance of performance and battery
+    cpuFreqGovernor = "schedutil"; # Better balance of performance and battery
   };
   
   # Thermal management
   services.thermald.enable = true;
+
+  services.upower.enable = true;
+
+  services.power-profiles-daemon.enable = true;
   
   # Battery optimization with better performance for development
-  services.tlp = {
+  /* services.tlp = {
     enable = true;
     settings = {
       #CPU_SCALING_GOVERNOR_ON_AC = "performance";
@@ -60,7 +64,7 @@
       # Reduce disk writeback frequency but not too aggressively
       DISK_IOSCHED = "mq-deadline";
     };
-  };
+  }; */
   
   # SSD optimization
   services.fstrim.enable = true;
@@ -75,6 +79,12 @@
       clickMethod = "buttonareas";  # Enable area-based clicking instead of clickfinger
     };
   };
+
+  services.fprintd.enable = true;
+
+  services.fprintd.tod.enable = true;
+
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
   
   # Support for convertible features
   hardware.sensor.iio.enable = true;  # For accelerometer/gyro
@@ -99,6 +109,8 @@
   environment.systemPackages = with pkgs; [
     powertop      # Power consumption analyzer
     intel-gpu-tools # Monitoring Intel GPU
+    fprintd
+    tpacpi-bat
   ];
 
   system.stateVersion = "25.05";

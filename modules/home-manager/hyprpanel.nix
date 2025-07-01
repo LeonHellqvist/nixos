@@ -6,23 +6,21 @@
     enable = true;
     systemd.enable = true;
     hyprland.enable = true;
-    overwrite.enable = true;
-    theme = "gruvbox_split";
-    override = {
-      theme.bar.menus.text = "#123ABC";
-    };
-    layout = {
-      "bar.layouts" = {
-        "0" = {
-          left = [ "dashboard" "workspaces" ];
-          middle = [ "media" ];
-          right = [ "volume" "systray" "notifications" ];
-        };
-      };
-    };
     settings = {
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
+
+      # theme = "gruvbox_split";
+
+      layout = {
+        "bar.layouts" = {
+          "0" = {
+            left = [ "dashboard" "workspaces" ];
+            middle = [ "media" "clock" ];
+            right = [ "cpu" "ram" "volume" "network" "bluetooth" "systray" "notifications" "battery"  ];
+          };
+        };
+      };
 
       menus.clock = {
         time = {
@@ -32,14 +30,17 @@
         weather.unit = "metric";
       };
 
-      menus.dashboard.directories.enabled = false;
-      menus.dashboard.stats.enable_gpu = true;
+      bar.autoHide = "never";
 
-      theme.bar.transparent = true;
+      bar.clock.format = "%H:%M";
+
+      scalingPriority = "hyprland";
+
+      menus.dashboard.directories.enabled = false;
 
       theme.font = {
         name = "CaskaydiaCove NF";
-        size = "16px";
+        size = "13px";
       };
     };
   };

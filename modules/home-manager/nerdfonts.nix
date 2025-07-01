@@ -1,7 +1,7 @@
 { pkgs, ...}:
 {
   home.packages = with pkgs; [
-    nerd-fonts.0xproto
+    nerd-fonts._0xproto
     nerd-fonts._3270
     nerd-fonts.agave
     nerd-fonts.anonymice
@@ -50,7 +50,7 @@
     nerd-fonts.monofur
     nerd-fonts.monoid
     nerd-fonts.mononoki
-    nerd-fonts.mplus
+    nerd-fonts."m+"
     nerd-fonts.noto
     nerd-fonts.open-dyslexic
     nerd-fonts.overpass

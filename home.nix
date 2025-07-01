@@ -3,9 +3,11 @@
 {
   imports = [
     ./modules/home-manager/wm/hyprland.nix
-    ./modules/home-manager/waybar.nix
+    #./modules/home-manager/waybar.nix
     ./modules/home-manager/sherlock.nix
     ./modules/home-manager/alacritty.nix
+    ./modules/home-manager/hyprpanel.nix
+    ./modules/home-manager/nerdfonts.nix
     inputs.zen-browser.homeModules.beta
   ];
 
@@ -60,7 +62,7 @@
     gthumb
     gimp3
     
-    dunst
+    #dunst
     libnotify
 
     font-awesome
@@ -186,13 +188,13 @@
   #};   
   home.sessionVariables.GTK_THEME = "adw-gtk3-dark";
 
-  services.dunst = {
-    enable = true;
+  /* services.dunst = {
+    enable = false;
 
     settings = {
       # ... dunstrc items
     };
-  };
+  }; */
 
   programs.zen-browser = {
     enable = true;
