@@ -35,6 +35,7 @@
     # pkgs.hello
 
     vscode
+    android-studio
     hyprpolkitagent
     hyprland-qt-support
     hyprpicker

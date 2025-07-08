@@ -233,6 +233,8 @@
     pkgs.distrobox
     linux-wifi-hotspot
     tor-browser-bundle-bin
+    rustc
+    cargo
   ];
 
   programs.file-roller.enable = true;

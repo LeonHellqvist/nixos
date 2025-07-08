@@ -16,8 +16,8 @@
         "bar.layouts" = {
           "0" = {
             left = [ "dashboard" "workspaces" ];
-            middle = [ "media" "clock" ];
-            right = [ "cpu" "ram" "volume" "network" "bluetooth" "systray" "notifications" "battery"  ];
+            middle = [ "media" ];
+            right = [ "clock" "cpu" "ram" "volume" "network" "bluetooth" "systray" "notifications" "battery"  ];
           };
         };
       };
@@ -27,7 +27,7 @@
           military = true;
           hideSeconds = true;
         };
-        weather.unit = "metric";
+        weather.enabled = false;
       };
 
       bar.autoHide = "never";
