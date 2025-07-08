@@ -5,7 +5,6 @@
   programs.hyprpanel = {
     enable = true;
     systemd.enable = true;
-    hyprland.enable = true;
     settings = {
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
