@@ -232,6 +232,7 @@
     scrcpy
     pkgs.distrobox
     linux-wifi-hotspot
+    wireguard-tools
     tor-browser-bundle-bin
     rustc
     cargo
