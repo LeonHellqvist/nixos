@@ -25,8 +25,16 @@ in
   };
 
   networking.hostName = "desktop"; # Define your hostname.
+  
+  
+  # Disable NetworkManager's internal DNS resolution
+  networking.networkmanager.dns = lib.mkForce "none";
 
-  networking.networkmanager.insertNameservers = [ "192.168.1.63" ];
+  # These options are unnecessary when managing DNS ourselves
+  #networking.useDHCP = false;
+  #networking.dhcpcd.enable = false;
+
+  networking.nameservers = [ "192.168.1.63" ];
 
   system.stateVersion = "24.11";
 }

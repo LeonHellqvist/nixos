@@ -9,7 +9,7 @@ let
   # Define monitor configurations for different machines
   monitorConfig = 
     if hostname == "desktop" then 
-      ", 3440@1440@143.97, 0x0, 1, vrr, 2"
+      ", 3440x1440@143.97, 0x0, 1, vrr, 2"
     else if hostname == "thinkpad" then
       ", 2880x1800@120, 0x0, 1.5, vrr, 0"
     else
@@ -115,10 +115,14 @@ in
   wayland.windowManager.hyprland = {
     # allow home-manager to configure hyprland
     enable = true;
-
+  
     settings = {
       monitor = monitorConfig;
       
+      debug = {
+        full_cm_proto = true;
+      };
+   
       cursor = {
         "no_hardware_cursors" = false;
       };

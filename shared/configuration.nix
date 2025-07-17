@@ -238,6 +238,8 @@
     cargo
   ];
 
+  programs.nix-ld.enable = true;
+
   programs.file-roller.enable = true;
 
   #xdg = {

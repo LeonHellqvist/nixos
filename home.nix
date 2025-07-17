@@ -34,7 +34,7 @@
     # # "Hello, world!" when run.
     # pkgs.hello
 
-    vscode
+    vscode-fhs
     android-studio
     hyprpolkitagent
     hyprland-qt-support
@@ -69,6 +69,7 @@
     font-awesome
 
     psst
+    spotify-tui
     stremio
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -83,6 +84,12 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  #programs.vscode = {
+  #  enable = true;
+  #  package = pkgs.vscode.fhs;
+  #};
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
